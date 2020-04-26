@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -31,15 +31,13 @@ public class SoupSpotSystem : ComponentSystem {
     /// </summary>
     private void spawnFoods() {
 
-        spawnFoodTimer -= 1;
+        spawnFoodTimer += 1;
 
-        if (spawnFoodTimer  <= 0) {
+        if (spawnFoodTimer  >= spawnFoodRate) {
             // TODO: spawn food
         }
     }
-    protected override void OnCreate() {
-        spawnFoodTimer = spawnFoodRate;
-    }
+    protected override void OnCreate() { }
     protected override void OnStartRunning() {
         spawnSoupSpots();
     }

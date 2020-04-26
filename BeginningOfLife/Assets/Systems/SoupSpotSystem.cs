@@ -14,7 +14,7 @@ public class SoupSpotSystem : ComponentSystem {
     /// <summary>
     /// Spawn initial soup spots in random location on the map.
     /// </summary>
-    protected override void OnStartRunning() {
+    private void spawnSoupSpots() {
         Random.InitState(1);
 
         spwanTimer -= Time.DeltaTime;
@@ -31,6 +31,9 @@ public class SoupSpotSystem : ComponentSystem {
                 EntityManager.SetComponentData(spawnedEntity, new Translation { Value = position });
             }
         }
+    }
+    protected override void OnStartRunning() {
+        spawnSoupSpots();
     }
     protected override void OnUpdate() { }
 

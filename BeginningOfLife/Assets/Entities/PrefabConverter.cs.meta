@@ -4,8 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - soupSpawnerPrefab: {fileID: 4599873333986402149, guid: 381df175288570761a3fb0f04255b37d,
-      type: 3}
+  - soupSpotPrefab: {instanceID: 0}
+  - foodPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

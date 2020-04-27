@@ -5,8 +5,9 @@ using Unity.Entities;
 
 public class PrefabConverter : MonoBehaviour, IDeclareReferencedPrefabs, IConvertGameObjectToEntity {
 
-    public GameObject soupSpawnerPrefab;
-    public static Entity soupSpawnerEntity;
+    // add these in the prefab converter script IN THE HIERARCHY, NOT THE PREFAB
+    public GameObject soupSpotPrefab;
+    public static Entity soupSpotEntity;
     public GameObject foodPrefab;
     public static Entity foodEntity;
 
@@ -14,14 +15,14 @@ public class PrefabConverter : MonoBehaviour, IDeclareReferencedPrefabs, IConver
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem) {
 
         // TODO: make this more clean
-        PrefabConverter.soupSpawnerEntity = conversionSystem.GetPrimaryEntity(soupSpawnerPrefab);
+        PrefabConverter.soupSpotEntity = conversionSystem.GetPrimaryEntity(soupSpotPrefab);
         PrefabConverter.foodEntity = conversionSystem.GetPrimaryEntity(foodPrefab);
     }
 
     public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs) {
 
         // TODO: make this more clean
-        referencedPrefabs.Add(soupSpawnerPrefab);
+        referencedPrefabs.Add(soupSpotPrefab);
         referencedPrefabs.Add(foodPrefab);
     }
 }

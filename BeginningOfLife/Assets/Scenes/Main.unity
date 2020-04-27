@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbcc8f719d0c3ddbb63609f2ffa11da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soupSpawnerPrefab: {fileID: 7785031230538532453, guid: b7cf96a28ba5989ef93a6951bed9e750,
+  soupSpotPrefab: {fileID: 7785031230538532453, guid: b7cf96a28ba5989ef93a6951bed9e750,
     type: 3}
   foodPrefab: {fileID: 2567447705068830228, guid: 8b5bca15bf85936d5860cf00623b6e52,
     type: 3}

@@ -4,7 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - soupSpotEntity: {instanceID: 0}
+  - soupSpotEntity: {fileID: 7785031230538532453, guid: b7cf96a28ba5989ef93a6951bed9e750,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

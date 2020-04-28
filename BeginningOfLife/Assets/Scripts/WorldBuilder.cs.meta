@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: c7386cd6b9e0ef7bbab4435f29ec4301
+guid: e40fc2a561189f8cf941b28f3334a249
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - soupSpotEntity: {fileID: 7785031230538532453, guid: b7cf96a28ba5989ef93a6951bed9e750,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -24,8 +24,11 @@ public class WorldManager : MonoBehaviour {
     public Entity foodSpawnerEntityPrefab;
     public Entity foodEntityPrefab;
 
-    // food spawner output locations
+    // food spawning
+    [Header("in framerate NOT seconds")]
+    [SerializeField] int foodSpawnRate;
     private float3[] foodSpawnerOutputLocations;
+    private int foodSpawningCounter;
 
     // other
     private World defaultWorld;
@@ -46,6 +49,9 @@ public class WorldManager : MonoBehaviour {
         // name entities accordingly
         entityManager.SetName(foodSpawnerEntityPrefab, "foodSpawner");
         entityManager.SetName(foodEntityPrefab, "food");
+
+        // initialize arrays
+        foodSpawnerOutputLocations = new float3[foodSpawnerAmount];
     }
 
     void Start() {
@@ -53,12 +59,39 @@ public class WorldManager : MonoBehaviour {
         defaultWorld = World.DefaultGameObjectInjectionWorld;
         entityManager = defaultWorld.EntityManager;
 
+        // food spawning
+        spawnFoodSpawners();
+        foodSpawningCounter = 0;
+    }
+
+    void spawnFoodSpawners() {
         for (int i = 0; i < foodSpawnerAmount; i++) {
             Entity newFoodSpawner = entityManager.Instantiate(foodSpawnerEntityPrefab);
             Vector2 randomDirection = Random.insideUnitCircle * mapRadius;
             float3 randomPoint = new float3(randomDirection.x, 0f, randomDirection.y);
             entityManager.SetComponentData(newFoodSpawner, new Translation {
                 Value = randomPoint
+            });
+            foodSpawnerOutputLocations[i] = randomPoint + entityManager.GetComponentData<FoodOutputLocation>(newFoodSpawner).Value;
+        }
+    }
+
+    void Update() {
+        if (foodSpawningCounter >= foodSpawnRate) {
+
+            // TODO: maybe make food spawners not all spawn foods at once?
+            foodSpawningCounter = 0;
+            SpawnFoods();
+        } else {
+            foodSpawningCounter += 1;
+        }
+    }
+
+    void SpawnFoods() {
+        foreach (float3 outptLocation in foodSpawnerOutputLocations) {
+            Entity newFood = entityManager.Instantiate(foodEntityPrefab);
+            entityManager.SetComponentData(newFood, new Translation {
+                Value = outptLocation
             });
         }
     }

@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 5451148125367848808}
   - component: {fileID: -8078965915855294368}
   m_Layer: 0
-  m_Name: SoupSpot
+  m_Name: FoodSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,10 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Value:
-    Value:
-      x: 0
-      y: 1.2
-      z: 0
+    x: 0
+    y: 1.2
+    z: 0
 --- !u!1 &8137842186225685620
 GameObject:
   m_ObjectHideFlags: 0

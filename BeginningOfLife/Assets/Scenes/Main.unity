@@ -131,7 +131,6 @@ GameObject:
   m_Component:
   - component: {fileID: 540660237}
   - component: {fileID: 540660238}
-  - component: {fileID: 540660239}
   m_Layer: 0
   m_Name: WorldGenerator
   m_TagString: Untagged
@@ -162,32 +161,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 540660236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11b5859b76498ec1a9f716bb8ea5cdd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f8e3ad22e9f9a1ec93d0b93c82b802c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapRadius: 10
-  foodSpawnerAmount: 4
-  randomSeed: 0
   foodSpawnerPrefab: {fileID: 7785031230538532453, guid: b7cf96a28ba5989ef93a6951bed9e750,
     type: 3}
   foodPrefab: {fileID: 2567447705068830228, guid: 8b5bca15bf85936d5860cf00623b6e52,
     type: 3}
---- !u!114 &540660239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 540660236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e40fc2a561189f8cf941b28f3334a249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   mapRadius: 10
-  foodSpawnerAmount: 5
-  randomSeed: 0
-  prefabConverter: {fileID: 540660238}
+  foodSpawnerAmount: 10
+  randomSeed: 42
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

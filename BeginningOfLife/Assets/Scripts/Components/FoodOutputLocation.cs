@@ -1,8 +1,8 @@
 ﻿using Unity.Entities;
-using Unity.Transforms;
+using Unity.Mathematics;
 
 [GenerateAuthoringComponent]
 public struct FoodOutputLocation : IComponentData
 {
-    public Translation Value;
+    public float3 Value;
 }

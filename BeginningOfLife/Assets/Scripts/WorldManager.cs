@@ -1,22 +1,31 @@
 ﻿using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
-using Unity.Rendering;
 using Unity.Mathematics;
+using Unity.Rendering;
+using Random = UnityEngine.Random;
 
 /// <summary>
-/// Converts GameObject prefabs into Entity prefabs.
+/// This MonoBehaviour generates the world and
+/// any new entities that need to be created
 /// </summary>
-public class PrefabConverter : MonoBehaviour
-{
+public class WorldManager : MonoBehaviour {
 
     // GameObject prefabs
     [SerializeField] GameObject foodSpawnerPrefab;
     [SerializeField] GameObject foodPrefab;
 
+    // World generate configuration
+    [SerializeField] public float mapRadius;
+    [SerializeField] public int foodSpawnerAmount;
+    [SerializeField] public int randomSeed;
+
     // converted Entities
     public Entity foodSpawnerEntityPrefab;
     public Entity foodEntityPrefab;
+
+    // food spawner output locations
+    private float3[] foodSpawnerOutputLocations;
 
     // other
     private World defaultWorld;
@@ -35,8 +44,23 @@ public class PrefabConverter : MonoBehaviour
         foodEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(foodPrefab, settings);
 
         // name entities accordingly
-        entityManager.SetName(foodSpawnerEntityPrefab, "foodSpawnerEntityPrefab");
-        entityManager.SetName(foodEntityPrefab, "foodEntityPrefab");
+        entityManager.SetName(foodSpawnerEntityPrefab, "foodSpawner");
+        entityManager.SetName(foodEntityPrefab, "food");
+    }
+
+    void Start() {
+        Random.InitState(randomSeed);
+        defaultWorld = World.DefaultGameObjectInjectionWorld;
+        entityManager = defaultWorld.EntityManager;
+
+        for (int i = 0; i < foodSpawnerAmount; i++) {
+            Entity newFoodSpawner = entityManager.Instantiate(foodSpawnerEntityPrefab);
+            Vector2 randomDirection = Random.insideUnitCircle * mapRadius;
+            float3 randomPoint = new float3(randomDirection.x, 0f, randomDirection.y);
+            entityManager.SetComponentData(newFoodSpawner, new Translation {
+                Value = randomPoint
+            });
+        }
     }
 
     void OnDestroy() {

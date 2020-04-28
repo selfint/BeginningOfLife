@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 11b5859b76498ec1a9f716bb8ea5cdd4
+guid: 0f8e3ad22e9f9a1ec93d0b93c82b802c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - soupSpotPrefab: {instanceID: 0}
-  - foodPrefab: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

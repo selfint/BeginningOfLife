@@ -76,8 +76,10 @@ public class WorldManager : MonoBehaviour {
 
         // scale map
         float4x4 newScale = entityManager.GetComponentData<CompositeScale>(mapEntity).Value;
-        newScale.c0.x = mapRadius * 2;
-        newScale.c2.z = mapRadius * 2;
+
+        // add 0.001 so nothing escapes below the map
+        newScale.c0.x = mapRadius * 2.5f;
+        newScale.c2.z = mapRadius * 2.5f;
         entityManager.SetComponentData(mapEntity, new CompositeScale {
             Value = newScale
         });

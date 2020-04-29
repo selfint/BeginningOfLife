@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Rendering;
+using Unity.Physics;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -92,6 +93,14 @@ public class WorldManager : MonoBehaviour {
             Entity newFood = entityManager.Instantiate(foodEntityPrefab);
             entityManager.SetComponentData(newFood, new Translation {
                 Value = outptLocation
+            });
+
+            // send food in a random trajectory upwards
+            Vector2 randomDirection = Random.insideUnitCircle;
+            float upwardsForce = Random.value;
+            float3 randomFoodDirection = new float3(randomDirection.x, upwardsForce, randomDirection.y);
+            entityManager.SetComponentData(newFood, new PhysicsVelocity {
+                Linear = randomFoodDirection
             });
         }
     }

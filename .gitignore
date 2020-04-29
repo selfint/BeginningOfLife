@@ -33,3 +33,6 @@
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
+# magic file that makes c# solution work
+BeginningOfLife/Assets/Scripts/SyncSolutionUtilities.cs
+BeginningOfLife/Assets/Scripts/SyncSolutionUtilities.cs.meta

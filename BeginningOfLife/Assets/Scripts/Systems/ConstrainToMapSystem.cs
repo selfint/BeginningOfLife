@@ -19,6 +19,8 @@ public class ConstrainToMapSystem : SystemBase {
         defaultWorld = World.DefaultGameObjectInjectionWorld;
         entityManager = defaultWorld.EntityManager;
 
+        // relies on the fact that there is only one mapEntity
+        // and only one entity with a MapData component
         Entity mapEntity = GetEntityQuery(typeof(MapData)).GetSingletonEntity();
         mapRadius = entityManager.GetComponentData<MapData>(mapEntity).mapRadius;
         mapHeight = entityManager.GetComponentData<MapData>(mapEntity).mapHeight;

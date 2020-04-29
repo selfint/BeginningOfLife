@@ -25,9 +25,18 @@ public class ConstrainToMapSystem : SystemBase {
     }
     protected override void OnUpdate() {
         float maxHeight = mapHeight;
+        float maxDistance = mapRadius;
         Entities.ForEach((ref Translation translation) => {
             if (translation.Value.y > maxHeight) {
                 translation.Value.y = maxHeight;
+            }
+
+            float2 entityLocation = new float2(translation.Value.x, translation.Value.z);
+            float distanceFromCenter = distance(entityLocation, new float2(0f, 0f));
+            if (distanceFromCenter > maxDistance) {
+                float2 newLocation = entityLocation * (maxDistance / distanceFromCenter);
+                translation.Value.x = newLocation.x;
+                translation.Value.z = newLocation.y;
             }
         }).ScheduleParallel();
     }

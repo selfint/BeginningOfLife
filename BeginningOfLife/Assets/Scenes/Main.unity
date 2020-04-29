@@ -170,9 +170,9 @@ MonoBehaviour:
     type: 3}
   mapGameObject: {fileID: 3599348750675998973, guid: 48843726a7fb4048cbbb0ba161f8ced3,
     type: 3}
-  mapRadius: 10
+  mapRadius: 32.42
   mapHeight: 10
-  foodSpawnerAmount: 10
+  foodSpawnerAmount: 59
   randomSeed: 42
   foodSpawnRate: 100
 --- !u!1 &705507993
@@ -343,8 +343,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.17187032, y: 0.4556051, z: -0.090133965, w: 0.8687695}
-  m_LocalPosition: {x: -14.81161, y: 7.638099, z: -10.742997}
+  m_LocalRotation: {x: 0.27124196, y: 0.537673, z: -0.18796752, w: 0.77588904}
+  m_LocalPosition: {x: -41.015217, y: 25.317913, z: -15.620296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

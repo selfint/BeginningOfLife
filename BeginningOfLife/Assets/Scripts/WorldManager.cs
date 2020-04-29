@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
@@ -57,8 +57,6 @@ public class WorldManager : MonoBehaviour {
 
     void Start() {
         Random.InitState(randomSeed);
-        defaultWorld = World.DefaultGameObjectInjectionWorld;
-        entityManager = defaultWorld.EntityManager;
 
         // food spawning
         spawnFoodSpawners();

@@ -13,6 +13,11 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class WorldManager : MonoBehaviour {
 
+    // general configuration
+    [Header("Change simulation speed")]
+    [Range(1f, 10f)]
+    [SerializeField] public float timeScale = 1f;
+
     // GameObject prefabs
     [SerializeField] GameObject foodSpawnerPrefab;
     [SerializeField] GameObject foodPrefab;
@@ -30,10 +35,9 @@ public class WorldManager : MonoBehaviour {
     public Entity mapEntity;
 
     // food spawning
-    [Header("in framerate NOT seconds")]
     [SerializeField] int foodSpawnRate;
     private float3[] foodSpawnerOutputLocations;
-    private int foodSpawningCounter;
+    private float foodSpawningCounter;
 
     // other
     private World defaultWorld;
@@ -104,17 +108,20 @@ public class WorldManager : MonoBehaviour {
     }
 
     void Update() {
+        setTimeScale();
+        SpawnFoods();
+    }
+
+    void setTimeScale() {
+        UnityEngine.Time.timeScale = timeScale;
+        Time.timeScale = timeScale;
+    }
+
+    void SpawnFoods() {
         if (foodSpawningCounter >= foodSpawnRate) {
 
             // TODO: maybe make food spawners not all spawn foods at once?
             foodSpawningCounter = 0;
-            SpawnFoods();
-        } else {
-            foodSpawningCounter += 1;
-        }
-    }
-
-    void SpawnFoods() {
         foreach (float3 outptLocation in foodSpawnerOutputLocations) {
             Entity newFood = entityManager.Instantiate(foodEntityPrefab);
             entityManager.SetComponentData(newFood, new Translation {
@@ -128,6 +135,9 @@ public class WorldManager : MonoBehaviour {
             entityManager.SetComponentData(newFood, new PhysicsVelocity {
                 Linear = randomFoodDirection
             });
+        }
+        } else {
+            foodSpawningCounter += Time.deltaTime;
         }
     }
 

@@ -1,9 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
 using Unity.Rendering;
 using Unity.Physics;
+using Unity.Collections;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -15,15 +16,18 @@ public class WorldManager : MonoBehaviour {
     // GameObject prefabs
     [SerializeField] GameObject foodSpawnerPrefab;
     [SerializeField] GameObject foodPrefab;
+    [SerializeField] GameObject mapGameObject;
 
     // World generate configuration
     [SerializeField] public float mapRadius;
+    [SerializeField] public float mapHeight;
     [SerializeField] public int foodSpawnerAmount;
     [SerializeField] public int randomSeed;
 
     // converted Entities
     public Entity foodSpawnerEntityPrefab;
     public Entity foodEntityPrefab;
+    public Entity mapEntity;
 
     // food spawning
     [Header("in framerate NOT seconds")]
@@ -46,10 +50,14 @@ public class WorldManager : MonoBehaviour {
         GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(defaultWorld, blobAssetStore);
         foodSpawnerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(foodSpawnerPrefab, settings);
         foodEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(foodPrefab, settings);
+        Entity mapEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(mapGameObject, settings);
+        mapEntity = entityManager.Instantiate(mapEntityPrefab);
+        initializeMap();
 
         // name entities accordingly
         entityManager.SetName(foodSpawnerEntityPrefab, "foodSpawner");
         entityManager.SetName(foodEntityPrefab, "food");
+        entityManager.SetName(mapEntity, "map");
 
         // initialize arrays
         foodSpawnerOutputLocations = new float3[foodSpawnerAmount];
@@ -61,6 +69,24 @@ public class WorldManager : MonoBehaviour {
         // food spawning
         spawnFoodSpawners();
         foodSpawningCounter = 0;
+    }
+
+    void initializeMap() {
+        entityManager.SetComponentData(mapEntity, new Translation { Value = float3.zero });
+
+        // scale map
+        float4x4 newScale = entityManager.GetComponentData<CompositeScale>(mapEntity).Value;
+        newScale.c0.x = mapRadius * 2;
+        newScale.c2.z = mapRadius * 2;
+        entityManager.SetComponentData(mapEntity, new CompositeScale {
+            Value = newScale
+        });
+
+        // add MapData component
+        entityManager.AddComponentData(mapEntity, new MapData {
+            mapRadius = mapRadius,
+            mapHeight = mapHeight
+        });
     }
 
     void spawnFoodSpawners() {

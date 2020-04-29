@@ -68,7 +68,8 @@ public class WorldManager : MonoBehaviour {
     }
 
     void Start() {
-        Random.InitState(randomSeed);
+        if (randomSeed != 0)
+            Random.InitState(randomSeed);
 
         // food spawning
         spawnFoodSpawners();

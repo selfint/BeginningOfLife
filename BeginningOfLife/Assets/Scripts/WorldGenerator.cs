@@ -17,7 +17,7 @@ public enum MapSystem {
 /// This MonoBehaviour generates the world and
 /// any new entities that need to be created
 /// </summary>
-public class WorldManager : MonoBehaviour {
+public class WorldGenerator : MonoBehaviour {
 
     // general configuration
     [Header("Change simulation speed")]

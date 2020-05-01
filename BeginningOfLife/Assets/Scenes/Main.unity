@@ -167,14 +167,14 @@ MonoBehaviour:
   timeScale: 1
   foodSpawnerPrefab: {fileID: 7785031230538532453, guid: b7cf96a28ba5989ef93a6951bed9e750,
     type: 3}
-  foodPrefab: {fileID: 2567447705068830228, guid: 8b5bca15bf85936d5860cf00623b6e52,
+  foodPrefab: {fileID: 7785031230538532453, guid: b7cf96a28ba5989ef93a6951bed9e750,
     type: 3}
   mapGameObject: {fileID: 3599348750675998973, guid: 48843726a7fb4048cbbb0ba161f8ced3,
     type: 3}
-  mapRadius: 100
-  mapHeight: 10
-  foodSpawnerAmount: 1000
-  randomSeed: 0
+  mapRadius: 10
+  mapHeight: 3
+  foodSpawnerAmount: 5
+  randomSeed: 42
   mapSystem: 1
   foodSpawnRate: 1
 --- !u!1 &705507993

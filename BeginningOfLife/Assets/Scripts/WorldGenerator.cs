@@ -69,7 +69,7 @@ public class WorldGenerator : MonoBehaviour {
         // map will only be used here, so no need to make it public
         Entity mapEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(mapGameObject, settings);
         mapEntity = entityManager.Instantiate(mapEntityPrefab);
-        initializeMap();
+        InitializeMap();
 
         // name entities accordingly
         entityManager.SetName(foodSpawnerEntityPrefab, "foodSpawner");
@@ -85,11 +85,11 @@ public class WorldGenerator : MonoBehaviour {
             Random.InitState(randomSeed);
 
         // food spawning
-        spawnFoodSpawners();
+        GenerateFoodSpawners();
         foodSpawningCounter = 0;
     }
 
-    void initializeMap() {
+    void InitializeMap() {
         entityManager.SetComponentData(mapEntity, new Translation { Value = float3.zero });
 
         // scale map
@@ -109,7 +109,7 @@ public class WorldGenerator : MonoBehaviour {
         });
     }
 
-    void spawnFoodSpawners() {
+    void GenerateFoodSpawners() {
         for (int i = 0; i < foodSpawnerAmount; i++) {
             Entity newFoodSpawner = entityManager.Instantiate(foodSpawnerEntityPrefab);
             Vector2 randomDirection = Random.insideUnitCircle * mapRadius;
@@ -122,16 +122,16 @@ public class WorldGenerator : MonoBehaviour {
     }
 
     void Update() {
-        setTimeScale();
-        SpawnFoods();
+        SetTimeScale();
+        GenerateFoods();
     }
 
-    void setTimeScale() {
+    void SetTimeScale() {
         UnityEngine.Time.timeScale = timeScale;
         Time.timeScale = timeScale;
     }
 
-    void SpawnFoods() {
+    void GenerateFoods() {
         if (foodSpawningCounter >= foodSpawnRate) {
 
             // TODO: maybe make food spawners not all spawn foods at once?

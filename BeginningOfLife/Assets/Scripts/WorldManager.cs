@@ -54,6 +54,8 @@ public class WorldManager : MonoBehaviour {
         GameObjectConversionSettings settings = GameObjectConversionSettings.FromWorld(defaultWorld, blobAssetStore);
         foodSpawnerEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(foodSpawnerPrefab, settings);
         foodEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(foodPrefab, settings);
+
+        // map will only be used here, so no need to make it public
         Entity mapEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(mapGameObject, settings);
         mapEntity = entityManager.Instantiate(mapEntityPrefab);
         initializeMap();

@@ -7,6 +7,12 @@ using Unity.Physics;
 using Unity.Collections;
 using Random = UnityEngine.Random;
 
+
+public enum MapSystem {
+    Constrain,
+    Wrap,
+}
+
 /// <summary>
 /// This MonoBehaviour generates the world and
 /// any new entities that need to be created
@@ -28,6 +34,7 @@ public class WorldManager : MonoBehaviour {
     [SerializeField] public float mapHeight;
     [SerializeField] public int foodSpawnerAmount;
     [SerializeField] public int randomSeed;
+    [SerializeField] public MapSystem mapSystem;
 
     // converted Entities
     public Entity foodSpawnerEntityPrefab;
@@ -48,6 +55,10 @@ public class WorldManager : MonoBehaviour {
         // get world and entity manager to keep lines short
         defaultWorld = World.DefaultGameObjectInjectionWorld;
         entityManager = defaultWorld.EntityManager;
+
+        // set map system
+        defaultWorld.GetExistingSystem<ConstrainToMapSystem>().Enabled = (mapSystem == MapSystem.Constrain);
+        defaultWorld.GetExistingSystem<WrapToMapSystem>().Enabled = (mapSystem == MapSystem.Wrap);
 
         // convert prefabs into entities
         blobAssetStore = new BlobAssetStore();
